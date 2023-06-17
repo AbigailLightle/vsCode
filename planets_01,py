@@ -3,9 +3,9 @@ import os
 import math
 from planets_helper_00 import Planet
 
-os.system('cls')
 
 pygame.init()
+os.system('cls')
 
 WIDTH, HEIGHT = (1300, 900)
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
