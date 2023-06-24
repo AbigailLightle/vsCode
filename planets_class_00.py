@@ -28,6 +28,11 @@ class Planet():
     
     # create FONTS
     FONT_LST_16 = pygame.font.SysFont("Lucida Sans Typewriter", 16)
+    FONT_LST_18 = pygame.font.SysFont("Lucida Sans Typewriter", 18)
+    FONT_LST_20 = pygame.font.SysFont("Lucida Sans Typewriter", 20)
+    FONT_LST_22 = pygame.font.SysFont("Lucida Sans Typewriter", 22)
+    FONT_LST_28 = pygame.font.SysFont("Lucida Sans Typewriter", 28)
+    FONT_LST_32 = pygame.font.SysFont("Lucida Sans Typewriter", 32)
     FONT_CS_36 = pygame.font.SysFont("comicsans", 36)
     
 
