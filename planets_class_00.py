@@ -27,12 +27,12 @@ class Planet():
     BLACK = (0, 0, 0)    
     
     # create FONTS
-    FONT_LST_16 = pygame.font.SysFont("Lucida Sans Typewriter", 16)
-    FONT_LST_18 = pygame.font.SysFont("Lucida Sans Typewriter", 18)
-    FONT_LST_20 = pygame.font.SysFont("Lucida Sans Typewriter", 20)
-    FONT_LST_22 = pygame.font.SysFont("Lucida Sans Typewriter", 22)
-    FONT_LST_28 = pygame.font.SysFont("Lucida Sans Typewriter", 28)
-    FONT_LST_32 = pygame.font.SysFont("Lucida Sans Typewriter", 32)
+    FONT_LST_16 = pygame.font.SysFont("Courier", 16)   # Lucida Sans Typewriter
+    FONT_LST_18 = pygame.font.SysFont("Courier", 18)
+    FONT_LST_20 = pygame.font.SysFont("Courier", 20)
+    FONT_LST_22 = pygame.font.SysFont("Courier", 22)
+    FONT_LST_28 = pygame.font.SysFont("Courier", 28)
+    FONT_LST_32 = pygame.font.SysFont("Courier", 32)
     FONT_CS_36 = pygame.font.SysFont("comicsans", 36)
     
 
@@ -117,3 +117,35 @@ class Planet():
                 updated_points.append((x, y))
 
         pygame.draw.lines(win, self.color, False, updated_points, 2)
+        
+    def display_distance_to_sun(self, win, x,y):
+        pygame.draw.circle(win, self.color, (60+ x,88+y), self.radius)
+
+       
+        if self.name == "Mercury":
+            distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+        if self.name ==  "Venus":
+            distance_text = Planet.FONT_LST_16.render(f"{self.name}   {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+        if self.name ==  "Earth":
+            distance_text = Planet.FONT_LST_16.render(f"{self.name}   {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+        if self.name ==  "Mars":
+            distance_text = Planet.FONT_LST_16.render(f"{self.name}    {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+
+
+        win.blit(distance_text, (x + 100, 78 + y))
+        
+        
+        
+            #     match self.name:
+            # case "Mercury":
+            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+            # case "Venus":
+            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+            # case "Mercury":
+            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+            # case "Mercury":
+            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
+        
+        
+        
+    
