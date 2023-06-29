@@ -1,5 +1,6 @@
 import pygame
 import math
+import collections
 
 pygame.init()
 
@@ -8,14 +9,14 @@ class Planet():
     AU = 149.5978707E9   # meters
     G = 6.6743E-11
     SIZE_SCALE = 250/AU     # 250 pixels per AU
-    TIMESTEP = 60*60*24    # 1 day in secs
+    TIMESTEP = 60*60*24     # 1 day in secs
     CENTER_OFFSET_X = 175
     CENTER_OFFSET_Y = 0 
     EARTH_SIZE = 20    # Relative Radius
     EARTH_VELOCITY = 29783
     WIDTH = None
     HEIGHT = None 
-    STOP_AFTER = 1000  # trial and error
+    MAX_ORBIT_LENGTH = 1000  # trial and error  
     
     # create COLORS
     WHITE = (255, 255, 255)
@@ -27,9 +28,9 @@ class Planet():
     BLACK = (0, 0, 0)    
     
     # create FONTS
-    FONT_LST_16 = pygame.font.SysFont("Courier", 16)   # Lucida Sans Typewriter
-    FONT_LST_18 = pygame.font.SysFont("Courier", 18)
-    FONT_LST_20 = pygame.font.SysFont("Courier", 20)
+    FONT_LST_16 = pygame.font.SysFont("Courier", 16, bold = True)   # Lucida Sans Typewriter
+    FONT_LST_18 = pygame.font.SysFont("Courier", 18, bold = True)
+    FONT_LST_20 = pygame.font.SysFont("Courier", 20, bold = True)
     FONT_LST_22 = pygame.font.SysFont("Courier", 22)
     FONT_LST_28 = pygame.font.SysFont("Courier", 28)
     FONT_LST_32 = pygame.font.SysFont("Courier", 32)
@@ -46,8 +47,14 @@ class Planet():
 
         self.mass = mass
 
-        self.orbit = [(self.x, self.y)]
-        self.distance_to_sun = 0
+        self.orbit = collections.deque(maxlen = Planet.MAX_ORBIT_LENGTH)
+        self.orbit.append ((self.x, self.y))
+        self.distance_to_sun = math.sqrt(self.x**2 + self.y**2)
+        self.dts_min = 9999999999999
+        self.dts_max = 0
+        self.dts_sum = 0
+        self.dts_sum_num = 0
+        self.dts_avg = 0
 
         self.x_vel = 0
         self.y_vel = y_vel
@@ -63,15 +70,21 @@ class Planet():
             total_fx += fx
             total_fy += fy
 
+        #   F = MA    A = (F/M)    VEL = A * Time     DISTANCE = VEL * TIME
         self.x_vel += total_fx / self.mass * self.TIMESTEP
         self.y_vel += total_fy / self.mass * self.TIMESTEP
 
         self.x += self.x_vel * self.TIMESTEP
         self.y += self.y_vel * self.TIMESTEP
-
-        # (stop after STOP_AFTER points)
-        if len(self.orbit) < Planet.STOP_AFTER:
-            self.orbit.append((self.x, self.y))   
+            
+        self.orbit.append((self.x, self.y)) 
+        
+        dts = math.sqrt(self.x**2 + self.y**2)
+        self.dts_sum_num += 1
+        self.dts_sum += dts
+        self.dts_avg = int(self.dts_sum / self.dts_sum_num)
+        self.dts_min =  int(dts if dts < self.dts_min else self.dts_min)
+        self.dts_max =  int(dts if dts > self.dts_max else self.dts_max)
             
                  
     def attraction(self, other):
@@ -113,7 +126,7 @@ class Planet():
             x = (x * Planet.SIZE_SCALE + Planet.WIDTH / 2) + Planet.CENTER_OFFSET_X
             y = (y * Planet.SIZE_SCALE + Planet.HEIGHT / 2) + Planet.CENTER_OFFSET_Y
 
-            if len(updated_points) < Planet.STOP_AFTER:
+            if len(updated_points) < Planet.MAX_ORBIT_LENGTH:
                 updated_points.append((x, y))
 
         pygame.draw.lines(win, self.color, False, updated_points, 2)
@@ -135,17 +148,3 @@ class Planet():
         win.blit(distance_text, (x + 100, 78 + y))
         
         
-        
-            #     match self.name:
-            # case "Mercury":
-            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
-            # case "Venus":
-            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
-            # case "Mercury":
-            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
-            # case "Mercury":
-            #         distance_text = Planet.FONT_LST_16.render(f"{self.name}  {math.floor(self.distance_to_sun/1000)} km", True, Planet.BLACK)
-        
-        
-        
-    

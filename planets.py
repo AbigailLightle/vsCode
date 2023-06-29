@@ -2,7 +2,8 @@ import pygame
 
 import os
 import math
-from planets_class_00 import Planet
+from planets_class import Planet
+import collections
 
 os.system('cls')
 
@@ -26,13 +27,15 @@ text_pause = Planet.FONT_LST_16.render("p          - Pause Toggle", True, Planet
 text_orbit = Planet.FONT_LST_16.render("o          - Orbit Toggle", True, Planet.BLACK)
 text_delete_sun = Planet.FONT_LST_16.render("s          - Delete Sun", True, Planet.BLACK)
 text_last_shortcut = Planet.FONT_LST_16.render("?          - Last Shortcut", True, Planet.BLACK)
-
-
+text_scaled = Planet.FONT_LST_18.render("All variables scaled accurately except visual size of the sun and planets ...", True, Planet.YELLOW)
 
 
 # create images for visible SCREEN output
 img_background = pygame.image.load("stars.jpg").convert()
-img_newton = pygame.image.load("Newtons_Gravity_Law.png")
+img_newton = pygame.image.load("Newtons_Gravity_Law.png").convert_alpha()
+
+
+
 
 # Create Planets and Sun
 # def __init__(self, name, x, y, relative_radius, color, mass, y_vel):
@@ -53,6 +56,8 @@ def pause():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     paused = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pause = False
         
 
 
@@ -106,7 +111,8 @@ while run == True:
                      width = 0, border_radius = 20)
     pygame.draw.rect(SCREEN, Planet.WHITE, (30,640,290,220),
                      width = 3, border_radius = 20) 
-    SCREEN.blit(img_newton, (35,685))   
+    SCREEN.blit(img_newton, (35,685))
+    SCREEN.blit(text_scaled, (55,872))
     
     
     # BLIT Text to Screen
@@ -141,6 +147,19 @@ while run == True:
             planet.draw_orbit(SCREEN)
       
     pygame.display.flip()
+    
+    if ticks%300 == 0:
+        for planet in planets:
+            if planet != sun:                     # != stands for not equal
+                print(planet.name)
+                print("min",planet.dts_min)
+                print("avg",planet.dts_avg)
+                print('max',planet.dts_max)
+                print('='*15)
+            else:
+                print()
+                print()
+            
 
 #################  END GAME LOOP ###############
 pygame.quit()
