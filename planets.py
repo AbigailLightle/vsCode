@@ -58,7 +58,18 @@ def pause():
                     paused = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pause = False
-        
+
+
+def gravity():
+    # RECTANGLE (Law Of Gravitation)  
+    pygame.draw.rect(SCREEN, Planet.GRAY, (30,640,290,220),
+                     width = 0, border_radius = 20)
+    pygame.draw.rect(SCREEN, Planet.WHITE, (30,640,290,220),
+                     width = 3, border_radius = 20) 
+    
+    SCREEN.blit(text_gravity, (78,650))
+    SCREEN.blit(img_newton, (35,685))
+    SCREEN.blit(text_scaled, (55,872))
 
 
 #################   END FUNCTIONS   ###############
@@ -85,6 +96,7 @@ while run == True:
     pygame.draw.rect(SCREEN, Planet.WHITE, (30,120,290,220),
                      width = 3, border_radius = 20)   
     
+    SCREEN.blit(text_stats, (58,130))
     mercury.display_distance_to_sun(SCREEN, 0, 95) 
     venus.display_distance_to_sun(SCREEN, 0, 138) 
     earth.display_distance_to_sun(SCREEN, 0, 181) 
@@ -96,6 +108,7 @@ while run == True:
     pygame.draw.rect(SCREEN, Planet.WHITE, (30,380,290,220),
                      width = 3, border_radius = 20)  
     
+    SCREEN.blit(text_shortcuts, (65,390))
     SCREEN.blit(text_arrow_up, (40,430))
     SCREEN.blit(text_arrow_down, (40,458))
     SCREEN.blit(text_pause, (40,486))
@@ -106,21 +119,24 @@ while run == True:
     pygame.display.set_caption(
     f"{program_title}      fps - {fps}      by Abigail M. Lightle      Science Fair 2023-2024")
     
-    # RECTANGLE (Law Of Gravitation)  
-    pygame.draw.rect(SCREEN, Planet.GRAY, (30,640,290,220),
-                     width = 0, border_radius = 20)
-    pygame.draw.rect(SCREEN, Planet.WHITE, (30,640,290,220),
-                     width = 3, border_radius = 20) 
-    SCREEN.blit(img_newton, (35,685))
-    SCREEN.blit(text_scaled, (55,872))
+    # # RECTANGLE (Law Of Gravitation)  
+    # pygame.draw.rect(SCREEN, Planet.GRAY, (30,640,290,220),
+    #                  width = 0, border_radius = 20)
+    # pygame.draw.rect(SCREEN, Planet.WHITE, (30,640,290,220),
+    #                  width = 3, border_radius = 20) 
+    
+    # SCREEN.blit(text_gravity, (78,650))
+    # SCREEN.blit(img_newton, (35,685))
+    # SCREEN.blit(text_scaled, (55,872))
+    gravity()
     
     
     # BLIT Text to Screen
     SCREEN.blit(title_text, (225, 5))
     SCREEN.blit(abigail_text, (980, 840))
-    SCREEN.blit(text_stats, (58,130))
-    SCREEN.blit(text_shortcuts, (65,390))
-    SCREEN.blit(text_gravity, (78,650))
+    # SCREEN.blit(text_stats, (58,130))
+    # SCREEN.blit(text_shortcuts, (65,390))
+    # SCREEN.blit(text_gravity, (78,650))
     
     
     for event in pygame.event.get():
@@ -138,6 +154,8 @@ while run == True:
             if event.key == pygame.K_s:
                 planets.remove(sun)
                 sun = None
+            if event.key == pygame.K_x:
+                mercury.y_vel *= 1.1
 
     # planets = [sun, mercury, venus, earth, mars]
     for planet in planets:
@@ -148,17 +166,17 @@ while run == True:
       
     pygame.display.flip()
     
-    if ticks%300 == 0:
-        for planet in planets:
-            if planet != sun:                     # != stands for not equal
-                print(planet.name)
-                print("min",planet.dts_min)
-                print("avg",planet.dts_avg)
-                print('max',planet.dts_max)
-                print('='*15)
-            else:
-                print()
-                print()
+    # if ticks%300 == 0:
+    #     for planet in planets:
+    #         if planet != sun:                     # != stands for not equal
+    #             print(planet.name)
+    #             print("min",planet.dts_min)
+    #             print("avg",planet.dts_avg)
+    #             print('max',planet.dts_max)
+    #             print('='*15)
+    #         else:
+    #             print()
+    #             print()
             
 
 #################  END GAME LOOP ###############
