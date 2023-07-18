@@ -66,9 +66,6 @@ def pause():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     paused = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-
-                paused = False
 
 
 def print_dts_min_avg_max(planets):
@@ -104,19 +101,20 @@ def text_rectangle(screen, planets):
 
 def text_shortcuts(screen):
     # BLIT Text Rectangle (SHORTCUTS & TEXT)
-    pygame.draw.rect(screen, Planet.GRAY, (30, 380, 290, 220),
+    pygame.draw.rect(screen, Planet.GRAY, (30, 365, 290, 250),
                      width=0, border_radius=20)
-    pygame.draw.rect(screen, Planet.WHITE, (30, 380, 290, 220),
+    pygame.draw.rect(screen, Planet.WHITE, (30, 365, 290, 250),
                      width=3, border_radius=20)
 
-    screen.blit(planet_global_variables.text_shortcuts, (65, 390))
+    screen.blit(planet_global_variables.text_shortcuts, (65, 375))
 
-    screen.blit(planet_global_variables.text_arrow_up, (45, 430))
-    screen.blit(planet_global_variables.text_arrow_down, (45, 458))
-    screen.blit(planet_global_variables.text_pause, (45, 486))
-    screen.blit(planet_global_variables.text_orbit, (45, 514))
-    screen.blit(planet_global_variables.text_delete_sun, (45, 542))
-    screen.blit(planet_global_variables.text_reset, (45, 570))
+    screen.blit(planet_global_variables.text_arrow_up, (45, 415))
+    screen.blit(planet_global_variables.text_arrow_down, (45, 443))
+    screen.blit(planet_global_variables.text_pause, (45, 471))
+    screen.blit(planet_global_variables.text_orbit, (45, 499))
+    screen.blit(planet_global_variables.text_delete_sun, (45, 527))
+    screen.blit(planet_global_variables.text_reset, (45, 555))
+    screen.blit(planet_global_variables.text_venus, (45, 583))
 
 
 def blit_title_and_name(screen):

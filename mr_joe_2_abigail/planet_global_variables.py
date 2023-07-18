@@ -20,6 +20,7 @@ text_pause = Planet.FONT_COURIER_16.render("p          - Pause Toggle", True, Pl
 text_orbit = Planet.FONT_COURIER_16.render("o          - Orbit Toggle", True, Planet.BLACK)
 text_delete_sun = Planet.FONT_COURIER_16.render("s          - Delete Sun", True, Planet.BLACK)
 text_reset = Planet.FONT_COURIER_16.render("r          - Reset", True, Planet.BLACK)
+text_venus = Planet.FONT_COURIER_16.render("v          - Inc Venus Vel", True, Planet.BLACK)
 
 text_scaled = Planet.FONT_COURIER_18.render(
     "All variables scaled accurately except visual size of the Sun and Planets ...",

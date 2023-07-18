@@ -126,11 +126,10 @@ while run == True:
                 planet_functions.data(SCREEN, CLOCK, planets)
             if event.key == pygame.K_m:
                 planet_functions.print_dts_min_avg_max(planets)
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            planet_functions.pause()
-        if event.type == pygame.K_d:
-            planet_functions.data(SCREEN, CLOCK, planets)
+            if event.key == pygame.K_v:
+                venus.y_vel *= 1.07
 
+                
     pygame.display.flip()
 
 #################  END GAME LOOP ###############
