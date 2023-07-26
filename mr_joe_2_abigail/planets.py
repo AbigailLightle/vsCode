@@ -128,6 +128,7 @@ while run == True:
                 planet_functions.print_dts_min_avg_max(planets)
             if event.key == pygame.K_v:
                 venus.y_vel *= 1.07
+                venus.x_vel *= 1.07
 
                 
     pygame.display.flip()
