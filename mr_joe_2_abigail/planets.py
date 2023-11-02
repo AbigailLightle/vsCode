@@ -18,7 +18,7 @@ Planet.HEIGHT = HEIGHT
 
 program_title = "Newtonian Orbital Simulation of the Terrestrial Planets"
 
-# create images
+# create images (background with stars)
 img_background = pygame.image.load("stars.jpg").convert()
 img_newton = pygame.image.load("Newtons_Gravity_Law.png").convert_alpha()
 
