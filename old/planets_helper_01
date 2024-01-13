@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class Planet():
@@ -32,3 +33,27 @@ class Planet():
         x = (self.x * Planet.SIZE_SCALE) + Planet.WIDTH/2 + Planet.CENTER_OFFSET_X
         y = (self.y * Planet.SIZE_SCALE) + Planet.HEIGHT/2 + Planet.CENTER_OFFSET_Y
         pygame.draw.circle(win, self.color, (x, y), self.radius)
+        
+    def update_position(self, planets):
+        
+        
+        for planet in planets:
+            if self == planet:
+                continue
+            self.attraction(planet)
+
+        
+    
+    def attraction(self, other):
+        other_x, other_y = other.x, other.y
+        distance_x = other_x - self.x
+        distance_y = other_y - self.y
+        distance = math.sqrt(distance_x**2 + distance_y**2)
+        
+        if other.name == "Sun":
+            self.distance_to_sun= distance
+        
+        force = Planet.G * self.mass * other.mass / distance **2
+        
+        
+        

@@ -4,8 +4,8 @@ import math
 from planets_helper_00 import Planet
 
 
-pygame.init()
 os.system('cls')
+pygame.init()
 
 WIDTH, HEIGHT = (1300, 900)
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -66,7 +66,9 @@ while run == True:
                 pass
 
     for planet in planets:
+        # planet.update_position(planets)
         planet.draw(SCREEN)
+        
 
     pygame.display.flip()
 
